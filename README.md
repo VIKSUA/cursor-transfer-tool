@@ -7,6 +7,11 @@ The project is designed around two commands:
 - `collect`: build a portable transfer package on the source machine
 - `apply`: restore the package on the target machine
 
+Additional helper commands:
+
+- `inspect`: show what was collected into the transfer package
+- `check`: validate that the transfer package is present and the target paths are usable
+
 ## What It Transfers
 
 - `User/settings.json`
@@ -85,7 +90,8 @@ That means the common workflow can stay very simple:
 1. Clone this repository anywhere on the new machine
 2. Run `npm install`
 3. Copy `transfer-package/` from the source machine
-4. Run `npm run apply`
+4. Run `npm run check`
+5. Run `npm run apply`
 
 You do not need to place the repository inside the Cursor directories.
 The tool reads the default Cursor paths from the config and applies the transfer package to those locations.
@@ -106,6 +112,12 @@ To inspect the generated package:
 npm run inspect
 ```
 
+To validate the target machine before applying:
+
+```bash
+npm run check
+```
+
 On the target machine, after copying the project and `transfer-package/`:
 
 ```bash
@@ -118,6 +130,7 @@ npm run apply
 - If `state.vscdb` does not exist yet, the tool can create a minimal database.
 - MCP configuration is restored from `.cursor/mcp.json`.
 - Absolute paths inside `mcp.json` are remapped from source paths to target paths during `apply`.
+- `check` does not modify anything. It only validates package files and target path readiness.
 
 ## Security Notes
 
@@ -131,8 +144,9 @@ Available scripts:
 
 ```bash
 npm run collect
-npm run apply
 npm run inspect
+npm run check
+npm run apply
 ```
 
 ## Commit Convention

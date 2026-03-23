@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { applyTransfer } from "./apply.js";
+import { checkTarget } from "./check.js";
 import { collect } from "./collect.js";
 import { loadConfig } from "./config.js";
 import { inspectPackage } from "./inspect.js";
@@ -26,12 +27,13 @@ function printUsage() {
   console.log("  cursor-transfer collect [--config path]");
   console.log("  cursor-transfer apply [--config path]");
   console.log("  cursor-transfer inspect [--config path]");
+  console.log("  cursor-transfer check [--config path]");
 }
 
 async function main() {
   const { command, configPath } = parseArgs(process.argv);
 
-  if (!command || !["collect", "apply", "inspect"].includes(command)) {
+  if (!command || !["collect", "apply", "inspect", "check"].includes(command)) {
     printUsage();
     process.exitCode = 1;
     return;
@@ -55,6 +57,21 @@ async function main() {
       } else {
         console.log(`- applied ${action.id}: ${action.targetPath}`);
       }
+    }
+    return;
+  }
+
+  if (command === "check") {
+    const result = await checkTarget(config);
+    console.log(`Package: ${result.packageDir}`);
+    console.log(`Ready to apply: ${result.ready ? "yes" : "no"}`);
+    console.log("Checks:");
+    for (const check of result.checks) {
+      console.log(`- [${check.level}] ${check.label}: ${check.message}`);
+    }
+
+    if (!result.ready) {
+      process.exitCode = 1;
     }
     return;
   }

@@ -17,13 +17,15 @@ The CLI currently exposes three commands:
 - `collect`
 - `apply`
 - `inspect`
+- `check`
 
 The main workflow is:
 
 1. Read paths from `cursor-transfer.config.json`
 2. Build `transfer-package/` on the source machine
 3. Copy the project and generated package to the target machine
-4. Apply the package to the target machine
+4. Run `check` on the target machine
+5. Apply the package to the target machine
 
 ## File Responsibilities
 
@@ -35,6 +37,7 @@ The main workflow is:
 - `src/sqlite.js`: SQLite import/export helpers
 - `src/fs-utils.js`: filesystem helpers
 - `src/inspect.js`: package inspection
+- `src/check.js`: target-machine validation for package presence and path readiness
 
 ## Path Policy
 
@@ -85,6 +88,7 @@ Before finishing meaningful changes, run the relevant commands locally:
 ```bash
 npm run collect
 npm run inspect
+npm run check
 npm run apply
 ```
 

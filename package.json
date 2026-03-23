@@ -10,7 +10,8 @@
   "scripts": {
     "collect": "node ./src/cli.js collect",
     "apply": "node ./src/cli.js apply",
-    "inspect": "node ./src/cli.js inspect"
+    "inspect": "node ./src/cli.js inspect",
+    "check": "node ./src/cli.js check"
   },
   "dependencies": {
     "sql.js": "^1.13.0"
