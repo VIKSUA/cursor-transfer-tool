@@ -1,0 +1,20 @@
+{
+  "source": {
+    "roamingCursorDir": "%APPDATA%\\Cursor",
+    "cursorHomeDir": "%USERPROFILE%\\.cursor",
+    "mcpConfigPath": "%USERPROFILE%\\.cursor\\mcp.json"
+  },
+  "target": {
+    "roamingCursorDir": "%APPDATA%\\Cursor",
+    "cursorHomeDir": "%USERPROFILE%\\.cursor",
+    "mcpConfigPath": "%USERPROFILE%\\.cursor\\mcp.json"
+  },
+  "package": {
+    "outputDir": "./transfer-package"
+  },
+  "options": {
+    "includeWindowState": true,
+    "overwriteExistingFiles": true,
+    "createMissingStateDb": true
+  }
+}
